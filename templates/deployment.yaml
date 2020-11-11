@@ -20,6 +20,12 @@ spec:
         release: {{ .Release.Name | quote }}
     spec:
 {{- include "explorer.imagePullSecrets" . | indent 6 }}
+      initContainers:
+       - name: wait-for-dependent-service
+         image: stefanevinance/wait-for-200
+         env:
+          - name: URL
+            value: http://odoo-postgresql-0.odoo-postgresql-headless.default.svc.khb.paas:5432
       containers:
       - name: {{ template "explorer.fullname" . }}
         image: {{ template "explorer.image" . }}
