@@ -21,10 +21,10 @@ spec:
     spec:
 {{- include "explorer.imagePullSecrets" . | indent 6 }}
       initContainers:
-       - name: "wait-for-services"
-         image: stevenaldinger/docker-k8s-wait-for-it
-         imagePullPolicy: Always
-         env:
+      - name: "wait-for-services"
+        image: stevenaldinger/docker-k8s-wait-for-it
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        env:
         - name: WAIT_FOR_IT
           value: "true"
         - name: WAIT_FOR_PODS
