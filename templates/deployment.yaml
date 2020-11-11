@@ -139,6 +139,9 @@ spec:
         - name: crypto10
           mountPath: /opt/explorer/app/platform/fabric/config.json
           subPath: config.json
+        - name: crypto11
+          mountPath: /etc/hosts
+          subPath: nnn
         
       volumes:
       - name: connection
@@ -174,6 +177,9 @@ spec:
       - name: crypto10
         configMap:
           name: {{ template "explorer.fullname" . }}-crypto10
+      - name: crypto11
+        configMap:
+          name: {{ template "explorer.fullname" . }}-crypto11
       - name: explorer-data
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
