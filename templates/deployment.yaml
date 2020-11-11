@@ -25,7 +25,7 @@ spec:
          image: stefanevinance/wait-for-200
          env:
           - name: URL
-            value: http://odoo-postgresql:5432
+            value: odoo-postgresql:5432
       containers:
       - name: {{ template "explorer.fullname" . }}
         image: {{ template "explorer.image" . }}
