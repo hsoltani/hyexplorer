@@ -21,11 +21,14 @@ spec:
     spec:
 {{- include "explorer.imagePullSecrets" . | indent 6 }}
       initContainers:
-       - name: wait-for-dependent-service
-         image: stefanevinance/wait-for-200
+       - name: "wait-for-services"
+         image: stevenaldinger/docker-k8s-wait-for-it
+         imagePullPolicy: Always
          env:
-          - name: URL
-            value: odoo-postgresql:5432
+        - name: WAIT_FOR_IT
+          value: "true"
+        - name: WAIT_FOR_PODS
+          value: "odoo-postgresql"
       containers:
       - name: {{ template "explorer.fullname" . }}
         image: {{ template "explorer.image" . }}
